@@ -1,7 +1,7 @@
-import Layout from "./component/Layout";
+import Chat from "./component/Chat";
 
 function App() {
-  return <Layout />;
+  return <Chat />;
 }
 
 export default App;

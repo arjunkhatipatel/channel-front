@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
+import "../assets/Chat.css";
+import "../assets/utils.css";
+import "../assets/Login.css";
 
-const Layout = () => {
+const Chat = () => {
   const [login, setLogin] = useState(false);
   const [channel, setChannel] = useState("");
   const [name, setName] = useState("");
@@ -10,10 +13,10 @@ const Layout = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const ws = new WebSocket("ws://192.168.1.19:8080/message");
+    // const ws = new WebSocket("wss://channel-vesh.onrender.com/message");
+    const ws = new WebSocket("http://192.168.1.21:8080/message");
 
     ws.onopen = () => {
-      console.log("Connected to WebSocket server");
       setError("");
     };
 
@@ -23,7 +26,6 @@ const Layout = () => {
 
     ws.onclose = (event) => {
       if (!event.wasClean) {
-        console.error("WebSocket connection closed unexpectedly:", event);
         setError("Connection lost. Server might be down.");
       } else {
         console.log("WebSocket connection closed cleanly");
@@ -68,74 +70,68 @@ const Layout = () => {
   };
 
   return (
-    <>
-      {error && (
-        <div
-          style={{
-            color: "red",
-            textAlign: "center",
-            marginBottom: "10px",
-          }}
-        >
-          {error}
-        </div>
-      )}
+    <div className="container">
+      {error && <div className="error-message">{error}</div>}
       {login ? (
-        <div
-          className="chat"
-          style={{ margin: "10px auto", width: "max-content" }}
-        >
-          <ul style={{ padding: "0" }}>
-            {msgList.length > 0
-              ? msgList.map((m, i) => <li key={i}>{m}</li>)
-              : "No message at this time"}
-          </ul>
-          <br />
-          <input
-            type="text"
-            name="msg"
-            id="msg"
-            placeholder="Message"
-            value={msg}
-            onChange={(e) => {
-              setMsg(e.target.value);
-            }}
-          />
-          <br />
-          <input type="button" value="Send" onClick={sendMsg} />
+        <div className="chat-container">
+          <div className="message-list">
+            {msgList.length > 0 ? (
+              msgList.map((m, i) => (
+                <div key={i} className="message">
+                  {m}
+                </div>
+              ))
+            ) : (
+              <div className="no-messages">No messages at this time</div>
+            )}
+          </div>
+          <div className="message-input">
+            <input
+              type="text"
+              placeholder="Type a message..."
+              value={msg}
+              onChange={(e) => {
+                setMsg(e.target.value);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && window.innerWidth >= 768) {
+                  e.preventDefault();
+                  sendMsg(e);
+                }
+              }}
+            />
+            <button onClick={sendMsg}>Send</button>
+          </div>
         </div>
       ) : (
-        <div
-          className="login"
-          style={{ margin: "10px auto", width: "max-content" }}
-        >
+        <div className="login-container">
           <input
             type="text"
-            name="channel"
-            id="channel"
             placeholder="Channel"
             value={channel}
             onChange={(e) => {
               setChannel(e.target.value);
             }}
           />
-          <br />
           <input
             type="text"
-            name="name"
             placeholder="Name"
-            id="name"
             value={name}
             onChange={(e) => {
               setName(e.target.value);
             }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && window.innerWidth >= 768) {
+                e.preventDefault();
+                onLogin(e);
+              }
+            }}
           />
-          <br />
-          <input type="button" value="Login" onClick={onLogin} />
+          <button onClick={onLogin}>Login</button>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
-export default Layout;
+export default Chat;

@@ -1,0 +1,74 @@
+/* Chat container styling */
+.chat-container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    /* Increased width for larger screens */
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+    overflow: hidden;
+    animation: slideInUp 0.5s ease-in-out;
+}
+
+.message-list {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    border-bottom: 1px solid #ddd;
+}
+
+.message {
+    background-color: #e9ecef;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    word-wrap: break-word;
+    /* Prevent horizontal scrolling in long messages */
+    animation: fadeInUp 0.3s ease-in-out;
+}
+
+.no-messages {
+    text-align: center;
+    color: #6c757d;
+    margin-top: 20px;
+}
+
+/* Message input area styling */
+.message-input {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    background-color: #f8f9fa;
+}
+
+.message-input input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-right: 10px;
+    resize: none;
+    overflow-y: auto;
+    max-height: 80px;
+    /* Limit to 4 lines */
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.message-input button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.message-input button:hover {
+    background-color: #0056b3;
+}
