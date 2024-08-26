@@ -1,3 +1,3 @@
-# https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+disallow: /private/
+Sitemap: https://www.channel-messaging.netlify.app/sitemap.xml
