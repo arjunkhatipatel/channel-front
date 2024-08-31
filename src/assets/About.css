@@ -1,0 +1,46 @@
+.about-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    text-align: justify;
+}
+
+.about-title {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.about-description {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.about-subtitle {
+    font-size: 1.8rem;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.about-features {
+    list-style-type: none;
+    padding: 0;
+}
+
+.about-features li {
+    font-size: 1.2rem;
+    margin: 5px 0;
+}
+
+.about-link {
+    color: #007bff;
+    text-decoration: none;
+    margin: 5px;
+    text-align: center;
+}
+
+.about-link:hover {
+    text-decoration: underline;
+}
